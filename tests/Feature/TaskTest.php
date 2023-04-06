@@ -4,19 +4,15 @@ namespace Tests\Feature;
 
 use App\Http\Requests\CreateTask;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskTest extends TestCase
 {
     // テストケースごとにデータベースをリフレッシュしてマイグレーションを再実行する
     use RefreshDatabase;
 
-    /**
-     * 各テストメソッドの実行前に呼ばれる
-     */
-    public function setUp()
+    public function setUp():void
     {
         parent::setUp();
 
@@ -32,7 +28,7 @@ class TaskTest extends TestCase
     {
         $response = $this->post('/folders/1/tasks/create', [
             'title' => 'Sample task',
-            'due_date' => 123, // 不正なデータ（数値）
+            'due_date' => 123,
         ]);
 
         $response->assertSessionHasErrors([
